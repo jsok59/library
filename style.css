@@ -1,0 +1,139 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: white;
+}
+
+body {
+	background-color: burlywood;
+}
+
+.library {
+	grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+	display: grid;
+	gap: 10px 10px;
+	padding: 20px;
+}
+
+.book {
+	height: 150px;
+	background-color: darkolivegreen;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	align-content: center;
+	border-radius: 10px;
+	border: 2px solid black;
+	padding: 10px;
+}
+
+.content {
+	display: grid;
+	align-content: center;
+    gap: 8px;
+}
+
+.heading {
+	padding: 20px 20px 0px 20px;
+	display: flex;
+	align-items: center;
+}
+
+.heading > button {
+	margin-left: auto;
+	background-color: slategrey;
+	padding: 10px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.heading > button > img {
+	height: 20px;
+}
+
+/*CARD BUTTONS */
+
+.removeButton {
+	margin-left: auto;
+	border: none;
+	cursor: pointer;
+	appearance: none;
+	background-color: inherit;
+}
+
+.close {
+	height: 20px;
+}
+
+.divButtons {
+	display: flex;
+	align-items: center;
+}
+
+/*************** DIALOG START *************/
+
+dialog { 
+    background-color: grey;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 15px;
+    
+ 
+}
+
+form label {
+    font-size: 1.5rem;
+}
+
+form {
+    
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    
+}
+
+form > div img {
+    height: 20px;
+}
+
+#formHeading {
+    display: flex;
+    
+}
+#formHeading > img {
+    margin-left: auto;
+}
+
+form input, form label, form h1, form button {
+    color: blue;
+}
+
+form input {
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    font-size: 1.4rem;
+}
+
+form button {
+    height: 40px;
+    width: 70px;
+    border-radius: 10px;
+    border: none;
+}
+
+
+
+/*************** DIALOG END *************/
