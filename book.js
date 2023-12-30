@@ -27,7 +27,6 @@ function makeLibrary() {
 		div.className = "book";
 		library.appendChild(div);
 
-        
 		/* Buttons for read and remove */
 
 		let divButtons = document.createElement("div");
@@ -38,20 +37,20 @@ function makeLibrary() {
 		let readButton = document.createElement("input");
 		readButton.type = "checkbox";
 		readButton.textContent = "Read";
-        readButton.addEventListener('click', () =>{
-            if (readButton.checked === true) {
-                div.style.backgroundColor = 'red';
-            } else {
-                div.style.backgroundColor = 'darkolivegreen';
-            }
-        })
+		readButton.addEventListener("click", () => {
+			if (readButton.checked === true) {
+				div.style.backgroundColor = "red";
+			} else {
+				div.style.backgroundColor = "darkolivegreen";
+			}
+		});
 		let removeButton = document.createElement("button");
 		removeButton.className = "removeButton";
-        removeButton.addEventListener('click', ()=>{
-            div.parentNode.removeChild(div);
-            const index = myLibrary.indexOf(obj);
-            myLibrary.splice(index, 1);
-        })
+		removeButton.addEventListener("click", () => {
+			div.parentNode.removeChild(div);
+			const index = myLibrary.indexOf(obj);
+			myLibrary.splice(index, 1);
+		});
 		let removeImg = document.createElement("img");
 		removeImg.src = "close.svg";
 		removeImg.className = "close";
@@ -75,16 +74,12 @@ function makeLibrary() {
 		divContent.appendChild(pPages);
 		div.appendChild(divContent);
 
-
-
-        if (obj.hasRead === true) {
-            div.style.backgroundColor = 'red';
-            readButton.checked = true;
-        }
+		if (obj.hasRead === true) {
+			div.style.backgroundColor = "red";
+			readButton.checked = true;
+		}
 	});
 }
-
-
 
 makeLibrary();
 
@@ -104,9 +99,18 @@ closeBtn.addEventListener("click", () => {
 });
 
 submitBtn.addEventListener("click", (e) => {
-	let book = new Book(popUp.title.value, popUp.author.value, popUp.pages.value, popUp.read.checked);
-    
-	addBookToLibrary(book);
-	makeLibrary();
-	popUp.reset();
+    let error = document.querySelector(".error");
+	if (popUp.title.value.trim() === "" || popUp.author.value.trim() === "" || popUp.pages.value.trim() === "") {
+        
+		error.textContent = "Please enter all the information of the book";
+	} else {
+        e.preventDefault();
+        error.textContent ='';
+		let book = new Book(popUp.title.value, popUp.author.value, popUp.pages.value, popUp.read.checked);
+
+		addBookToLibrary(book);
+		makeLibrary();
+		popUp.reset();
+        dialog.close()
+	}
 });
