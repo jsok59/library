@@ -1,9 +1,5 @@
-
-
-
-
-const myLibrary =  [];
-let important_prop = ["title", "author", "pages"]
+const myLibrary = [];
+let important_prop = ["title", "author", "pages"];
 
 function Book(title, author, pages, hasRead) {
 	this.title = title;
@@ -16,99 +12,101 @@ function Book(title, author, pages, hasRead) {
 	};
 }
 
-
 function addBookToLibrary(book) {
-    myLibrary.push(book);
+	myLibrary.push(book);
 }
 
 function makeLibrary() {
-    let library = document.querySelector('.library');
-    myLibrary.forEach((obj) => {
-        let div = document.createElement('div');
-        div.className = "book"
-        library.appendChild(div);
-        /* Buttons for read and remove */
-    
-        let divButtons = document.createElement('div');
-        divButtons.className = "divButtons";
-        div.appendChild(divButtons);
-        let readLabel = document.createElement('label');
-        readLabel.innerHTML = "Read: ";
-        let readButton = document.createElement('input');
-        readButton.type = 'checkbox';
-        readButton.innerHTML = "Read";
-        let removeButton = document.createElement('button');
-        removeButton.className = "removeButton";
-        let removeImg = document.createElement('img');
-        removeImg.src = "close.svg";
-        removeImg.className = "close";
-        removeButton.appendChild(removeImg);
-        readLabel.appendChild(readButton);
-        
-        divButtons.appendChild(readLabel);
-        divButtons.appendChild(removeButton);
-        
+	let library = document.querySelector(".library");
+	let cards = document.querySelectorAll(".book");
+	cards.forEach((card) => {
+		card.parentNode.removeChild(card);
+	});
+	myLibrary.forEach((obj) => {
+		let div = document.createElement("div");
+		div.className = "book";
+		library.appendChild(div);
 
-        /* Content for book card */
-        let divContent = document.createElement('div');
-        divContent.className = "content";
-        let pTitle = document.createElement('p');
-        pTitle.innerHTML = `Title: ${obj.title}`;
-        divContent.appendChild(pTitle);
-        let pAuthor = document.createElement('p');
-        pAuthor.innerHTML = `Author: ${obj.author}`;
-        divContent.appendChild(pAuthor);
-        let pPages = document.createElement('p');
-        pPages.innerHTML = `Pages: ${obj.pages}`;
-        divContent.appendChild(pPages);
-        div.appendChild(divContent);
         
-    })
+		/* Buttons for read and remove */
+
+		let divButtons = document.createElement("div");
+		divButtons.className = "divButtons";
+		div.appendChild(divButtons);
+		let readLabel = document.createElement("label");
+		readLabel.textContent = "Read: ";
+		let readButton = document.createElement("input");
+		readButton.type = "checkbox";
+		readButton.textContent = "Read";
+        readButton.addEventListener('click', () =>{
+            if (readButton.checked === true) {
+                div.style.backgroundColor = 'red';
+            } else {
+                div.style.backgroundColor = 'darkolivegreen';
+            }
+        })
+		let removeButton = document.createElement("button");
+		removeButton.className = "removeButton";
+        removeButton.addEventListener('click', ()=>{
+            div.parentNode.removeChild(div);
+            const index = myLibrary.indexOf(obj);
+            myLibrary.splice(index, 1);
+        })
+		let removeImg = document.createElement("img");
+		removeImg.src = "close.svg";
+		removeImg.className = "close";
+		removeButton.appendChild(removeImg);
+		readLabel.appendChild(readButton);
+
+		divButtons.appendChild(readLabel);
+		divButtons.appendChild(removeButton);
+
+		/* Content for book card */
+		let divContent = document.createElement("div");
+		divContent.className = "content";
+		let pTitle = document.createElement("p");
+		pTitle.textContent = `Title: ${obj.title}`;
+		divContent.appendChild(pTitle);
+		let pAuthor = document.createElement("p");
+		pAuthor.textContent = `Author: ${obj.author}`;
+		divContent.appendChild(pAuthor);
+		let pPages = document.createElement("p");
+		pPages.textContent = `Pages: ${obj.pages}`;
+		divContent.appendChild(pPages);
+		div.appendChild(divContent);
+
+
+
+        if (obj.hasRead === true) {
+            div.style.backgroundColor = 'red';
+            readButton.checked = true;
+        }
+	});
 }
 
 
 
-
-
-let book1 = new Book("Lion King", "Stevie Wonder", 213, true);
-let book2 = new Book("Lion King", "Stevie Wonder", 213, true);
-myLibrary.push(book1);
-myLibrary.push(book2);
-
 makeLibrary();
-
-
 
 /************** DIALOG  **************/
 
-const dialog = document.querySelector('dialog');
-const showBtn = document.querySelector('.heading > button');
-const closeBtn = document.querySelector('#close');
-const submitBtn = document.querySelector('#submitBtn')
+const dialog = document.querySelector("dialog");
+const showBtn = document.querySelector(".heading > button");
+const closeBtn = document.querySelector("#close");
+const submitBtn = document.querySelector("#submitBtn");
 
+showBtn.addEventListener("click", (e) => {
+	dialog.showModal();
+});
 
-showBtn.addEventListener('click', (e) => {
+closeBtn.addEventListener("click", () => {
+	dialog.close();
+});
+
+submitBtn.addEventListener("click", (e) => {
+	let book = new Book(popUp.title.value, popUp.author.value, popUp.pages.value, popUp.read.checked);
     
-    dialog.showModal();
+	addBookToLibrary(book);
+	makeLibrary();
+	popUp.reset();
 });
-
-closeBtn.addEventListener('click', () => {
-    dialog.close();
-});
-
-submitBtn.addEventListener('click', (e) => {
-
-    let book = new Book (popUp.title.value, popUp.author.value, popUp.pages.value, true);
-    console.log(popUp.title.value==="");
-    addBookToLibrary(book);
-    makeLibrary();
-    popUp.reset();
-})
-
-
-
-
-
-
-
-

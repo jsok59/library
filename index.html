@@ -14,7 +14,7 @@
 		</div>
 		<div class="library"></div>
 		<dialog>
-			<form method='dialog' id="popUp">
+			<form method='dialog' name="popUp">
 				<div id="formHeading">
 					<h1>New Book</h1>
 					<img src="close.svg" alt="closeBtn" id="close"/>
@@ -30,6 +30,10 @@
 				<div>
 					<label for="pages">Pages: </label>
 					<input type="number" id="pages" required/>
+				</div>
+				<div>
+					<label for="read">Read: </label>
+					<input type="checkbox" id="read" required/>
 				</div>
 				<div>
 					<button type="submit" id="submitBtn" value="default">Add Book</button>
